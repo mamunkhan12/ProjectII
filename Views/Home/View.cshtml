@@ -1,0 +1,15 @@
+﻿@model ProjectII.Models.User
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+<jscript>
+    $('#secondaryButton').click(function(){
+    $("#primaryButton").click();
+    })
+</jscript>
+<input type="button" id="primaryButton" onclick="ExistingLogic()" />
+<input type="button" id="secondaryButton" />
+

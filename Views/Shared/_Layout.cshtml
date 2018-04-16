@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>@ViewBag.Title - UTSORGO FOUNDATION</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<style>
+    .dropbtn {
+        background-color: #4B0082;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+
+</style>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #4B0082;font-size: 16px; font-weight: bold; color: white;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-header pull-left">
+                    <img src="~/Content/logo.JPG" style="width: 40px;">
+                </div>
+                @Html.ActionLink("উৎসর্গ ফাউন্ডেশন", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (Session["UserId"] != null )
+                    { 
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                       
+                        <li>@Html.ActionLink("Member", "Member", "Home")</li>
+                        if ( Session["Admin"]!=null)
+                         {
+                             <li>@Html.ActionLink("AddTarget", "VicReg", "Home")</li>
+                             <li>@Html.ActionLink("DonationHistory", "PaymentHistory", "Home")</li>
+                         }
+
+                        <li>@Html.ActionLink("Donation", "Payment", "Home")</li>
+                        
+                        @*<li>@Html.ActionLink("@Model.Sum(i=>i.Amount)", "PaymentHistory", "Home")</li>*@
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropbtn">TargetList</button>
+                                <div class="dropdown-content">
+                                    <a href="/Home/Children">Children</a>
+                                    <a href="/Home/Adult">Adult</a>
+                                    <a href="/Home/Poor">Poor</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            
+                            <div class="dropdown">
+                                
+                                <button style="color:" class="dropbtn"><i class="fa fa-user"style="font-size:20px;"></i>@Session["FullName"]</button>
+                                <div class="dropdown-content">
+                                    <a href="/Home/LogOut">Logout</a>
+                                </div>
+                            </div>
+                        </li>
+
+                    }
+
+                    @if (Session["UserId"] == null)
+                    {
+                        <li style="text-align: right;">@Html.ActionLink("Registration", "Registration", "Home")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - UTSORGO FOUNDATION Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

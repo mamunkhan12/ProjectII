@@ -1,0 +1,85 @@
+﻿@model ProjectII.Models.History
+
+@{
+    ViewBag.Title = "History";
+}
+
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.VictimId, htmlAttributes: new { @class = "control-label col-md-2" })
+
+
+        <div class="col-md-10">
+
+            <input type="text" id="VictimId" name="VictimId" class="form-control" value="@Session["Id"]" readonly />
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            <input type="text" id="FullName" name="FullName" class="form-control" value="@Session["FullNameVictim"]" readonly />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            <input type="text" id="Type" name="Type" class="form-control" value="@Session["Type"]" readonly />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            <input type="text" id="Address" name="Address" class="form-control" value="@Session["VictimAddress"]" readonly />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Donation, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Donation, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Donation, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+ 
+    <div class="form-group">
+        
+        <div class="col-md-10">
+
+            <input type="hidden" id="Date" name="Date" class="form-control" value=" @DateTime.Now"  readonly />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Donation" class="form-control" style="background-color: #4B0082; color: white;"  />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

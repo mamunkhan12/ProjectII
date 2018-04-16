@@ -1,0 +1,111 @@
+﻿@model IEnumerable<ProjectII.Models.Victim>
+
+@{
+    ViewBag.Title = "Children";
+}
+
+<h2>Children</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    
+    
+</style>
+<body>
+<table class="table" id="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.VictimType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.VictimType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+
+            </td>
+           
+            @if (Session["Admin"]!=null)
+            {
+                <td>
+
+                    @Html.ActionLink("Pay", "Pay", new { id = item.Id, FullName = item.FullName, Type = item.VictimType, NID = item.NID, Address = item.Adress }) |
+                    @Html.ActionLink("History", "VictimPaymentHistory", new { id = item.Id })
+                </td>
+            }
+        </tr>
+    }
+
+</table>
+
+
+
+
+
+
+
+@*<input type="button" id="tst" value="OK" onclick="fnselect()" />
+<script>
+    selected = table.getElementsByClassName('selected');
+    table.onclick = highlight;
+    function highlight(e) {
+        if (selected[0]) selected[0].className = '';
+        e.target.parentNode.className = 'selected';
+    }
+    function fnselect(){
+        var $row=$(this).parent().find('td');
+        var clickeedID=$row.eq(0).text();
+        alert(clickeedID);
+    }
+</script>*@
+</body>
+
+
